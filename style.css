@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.logo{
+    width: 2%;
+    height: 2%;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.admin-img {
+    width: 100px; /* ajuste conforme necessário */
+    height: auto; /* para manter a proporção da imagem */
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.button-container .btn {
+    padding: 10px 20px; /* ajuste conforme necessário */
+    font-size: 1rem; /* ajuste conforme necessário */
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+}
