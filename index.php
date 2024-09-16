@@ -1,5 +1,7 @@
 <?php
 include("includes/connect.php");
+include("functions/common_function.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +16,11 @@ include("includes/connect.php");
     <!-- custom css link !-->
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+body{
+  overflow-x: hidden;
+}
+</style>
 <body>
     <!--navbar start !-->
     <div class="container-fluid p-0">
@@ -27,41 +34,55 @@ include("includes/connect.php");
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Products</a>
+          <a class="nav-link" href="displayAll.php">Products</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
-        </li>
+        <?php
+        if(isset($_SESSION['userName'])){
+          echo "<li class='nav-item'><a class='nav-link' href='./users_area/profile.php'>My Profile</a></li>";
+        }else{
+          echo "<li class='nav-item'><a class='nav-link' href='./users_area/userRegist.php'>Regist</a></li>";
+        }
+        ?>
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+          <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?php getCartItem(); ?></sup></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Total Price: 100$/-</a>
-        </li>
-        
+          <a class="nav-link" href="#">Total Price: <?php getTotalPrice(); ?>$/-</a>
+        </li> 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+      <form class="d-flex" role="search" action="searchProduct.php" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchData">
+         <input type="submit" value="Search" class="btn btn-outline-light" name="searchDataProduct">
       </form>
     </div>
   </div>
 </nav>
-
+<!-- calling cart function !-->
+<?php cart(); ?>
 <!-- second child !-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 <ul class="navbar-nav me-auto">
+  <?php
+    if(isset($_SESSION['userName'])){
+      echo "<li class='nav-item'><a class='nav-link' href='#'>Welcome: ".$_SESSION['userName']."</a></li>";
+    }else{
+      echo "<li class='nav-item'><a class='nav-link' href='#'>Welcome Guest</a></li>";
+    }
+  ?>
     <li class="nav-item">
-        <a class="nav-link" href="#">Welcome Guest</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+    <?php
+      if(!isset($_SESSION['userName'])){
+        echo "<li class='nav-item'><a class='nav-link' href='./users_area/userLogin.php'>Login</a></li>";
+      }else{
+        echo "<li class='nav-item'><a class='nav-link' href='./users_area/logout.php'>Logout</a></li>";
+      }
+    ?>   
 </ul>
 </nav>
 <!-- third child !-->
@@ -70,75 +91,23 @@ include("includes/connect.php");
     <p class="text-center">Where you can get all over the football jerseys</p>
 </div>
 <!--forth child !-->
-<div class="row">
+<div class="row px-1">
     <div class="col-md-10">
         <!-- all products !-->
-        <div class="row">
-            <div class="col-md-4 mb-4">
-            <div class="card">
-  <img src="img/acmilan0607away.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">AC Milan - 06/07 - Away Kit</h5>
-    <p class="card-text"></p>
-    <a href="#" class="btn btn-info">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View More</a>
-  </div>
+          <div class="row">
+      <!-- fetching products -->
+          <?php
+          // calling getProducts function
+          getProducts();
+          getUniqueCategories();
+          getUniqueBrands();
+          // $ip = getIPAddress();  
+          // echo 'User Real IP Address - '.$ip;
+          ?>
+<!-- row end -->
 </div>
-            </div> 
-            <div class="col-md-4 mb-4" ><div class="card">
-  <img src="img/unitedretro1998princ.webp" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Manchester United - 97/98 - Home Kit</h5>
-    <p class="card-text"></p>
-    <a href="#" class="btn btn-info">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View More</a>
-  </div>
-</div></div> 
-            <div class="col-md-4 mb-4"><div class="card">
-  <img src="img/intermilan9798.webp" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Inter Milan - 97/98 - Home Kit</h5>
-    <p class="card-text"></p>
-    <a href="#" class="btn btn-info">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View More</a>
-  </div>
+<!-- column end -->
 </div>
-</div>
-<div class="col-md-4 mb-4"><div class="card">
-  <img src="img/holanda1.webp" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Netherlands - 88/89 - Home Kit</h5>
-    <p class="card-text"></p>
-    <a href="#" class="btn btn-info">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View More</a>
-  </div>
-</div>
-</div>
-<div class="col-md-4 mb-4"><div class="card">
-  <img src="img/barcelona9295.webp" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">FC Barcelona - 92/95 - Home Kit</h5>
-    <p class="card-text"></p>
-    <a href="#" class="btn btn-info">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View More</a>
-  </div>
-</div>
-</div>
-<div class="col-md-4 mb-4"><div class="card">
-  <img src="img/sporting0103.webp" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Sporting - 01/03 - Home Kit</h5>
-    <p class="card-text"></p>
-    <a href="#" class="btn btn-info">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View More</a>
-  </div>
-</div>
-</div></div>
-
-        
-    </div>
-    
-
     <div class="col-md-2 bg-secondary p-0 ">
         <!-- brands to be displayed !-->
         <ul class="navbar-nav me-auto text-center">
@@ -146,15 +115,8 @@ include("includes/connect.php");
                 <a href="#" class="nav-link text-light"><h4>Brands</h4></a>
             </li>
             <?php
-            $select_brands="Select * from `brands`";
-            $result_brands=mysqli_query($con,$select_brands);
-
-            while($row_data = mysqli_fetch_assoc($result_brands)){
-              $brand_title = $row_data['brand_title'];
-              $brand_id = $row_data['brand_id'];
-              echo "<li class='nav-item'>
-                <a href='index.php?brand=$brand_title' class='nav-link text-light'>$brand_title</a>";
-            }
+            // calling getBrands function
+            getBrands();
             ?>         
         </ul>
 
@@ -165,21 +127,10 @@ include("includes/connect.php");
                 <a href="#" class="nav-link text-light"><h4>Categories</h4></a>
             </li>
             <?php
-            $select_categories="Select * from `categories`";
-            $result_categories=mysqli_query($con,$select_categories);
-
-            while($row_data = mysqli_fetch_assoc($result_categories)){
-              $category_title = $row_data['category_title'];
-              $category_id = $row_data['category_id'];
-              echo "<li class='nav-item'>
-                <a href='index.php?category=$category_id' class='nav-link text-light'>$category_title</a>";
-            }
+            // calling getCategories function
+            getCategories();
             ?>  
         </ul>
-        
-        
-
-
     </div>
     
 </div>
@@ -195,9 +146,8 @@ include("includes/connect.php");
 
 
     <!-- last child !-->
-    <div class="bg-info p-3 text-center">
-        <p>All rights reserved © Designed by Gustavo Gião - 2023</p>
-    </div>
+    <!-- include !-->
+    <?php include("./includes/footer.php"); ?> 
     </div>
 
 

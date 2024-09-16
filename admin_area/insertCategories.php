@@ -3,7 +3,7 @@ include("../includes/connect.php");
 if(isset($_POST['insert_cat'])){
     $category_title = $_POST['cat_title'];
     // select data from database
-    $select_query = "select * from categories where category_title='$category_title'";
+    $select_query = "select * from categoriess where category_title='$category_title'";
     $resultSelect = mysqli_query($con,$select_query);
     $number = mysqli_num_rows($resultSelect);
     if($number > 0){
@@ -11,7 +11,7 @@ if(isset($_POST['insert_cat'])){
         echo "<script>window.open('index.php?insert_category','_self')</script>";
         exit();
     }
-    $insert_category = "insert into categories (category_title) values ('$category_title')";
+    $insert_category = "insert into categoriess (category_title) values ('$category_title')";
     $result = mysqli_query($con,$insert_category);
     if($result){
         echo "<script>alert('Category has been inserted!')</script>";

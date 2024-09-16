@@ -3,7 +3,7 @@ include("../includes/connect.php");
 if(isset($_POST['insert_brand'])){
     $brand_title = $_POST['brand_title'];
     // select data from database
-    $select_query = "select * from brands where brand_title='$brand_title'";
+    $select_query = "select * from brandss where brand_title='$brand_title'";
     $resultSelect = mysqli_query($con,$select_query);
     $number = mysqli_num_rows($resultSelect);
     if($number > 0){
@@ -11,7 +11,7 @@ if(isset($_POST['insert_brand'])){
         echo "<script>window.open('index.php?insert_brand','_self')</script>";
         exit();
     }
-    $insert_brand = "insert into brands (brand_title) values ('$brand_title')";
+    $insert_brand = "insert into brandss (brand_title) values ('$brand_title')";
     $result = mysqli_query($con,$insert_brand);
     if($result){
         echo "<script>alert('Brand has been inserted!')</script>";

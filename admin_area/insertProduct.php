@@ -22,7 +22,7 @@ if(isset($_POST['insert_product'])){
     move_uploaded_file($temp_image2,"product_images/$productImage2");
     move_uploaded_file($temp_image3,"product_images/$productImage3");
     // insert query
-    $insert_products="insert into `products` (product_title,product_desc,product_keywords,category_id,brand_id,product_image1,product_image2,product_image3, product_price,date,status) values ('$product_title','$product_desc','$product_keywords','$product_category','$product_brand','$productImage1','$productImage2','$productImage3','$product_price',NOW(),'$product_status')";
+    $insert_products="insert into `productss` (product_title,product_desc,product_keywords,category_id,brand_id,product_image1,product_image2,product_image3, product_price,date,status) values ('$product_title','$product_desc','$product_keywords','$product_category','$product_brand','$productImage1','$productImage2','$productImage3','$product_price',NOW(),'$product_status')";
     $result_query=mysqli_query($con,$insert_products);
     if($result_query){
     echo "<script>alert('Product has been inserted!')</script>";
@@ -68,7 +68,7 @@ if(isset($_POST['insert_product'])){
                     <select name="product_categories" id="" class="form-select">
                         <option value="">Select a Category</option>
                         <?php
-                        $get_categories = "select * from categories";
+                        $get_categories = "select * from categoriess";
                         $run_categories = mysqli_query($con,$get_categories);
                         while($row_categories = mysqli_fetch_array($run_categories)){
                             $category_title = $row_categories['category_title'];
@@ -83,7 +83,7 @@ if(isset($_POST['insert_product'])){
                     <select name="product_brands" id="" class="form-select">
                         <option value="">Select a Brand</option>
                         <?php
-                        $get_brands = "select * from brands";
+                        $get_brands = "select * from brandss";
                         $run_brands = mysqli_query($con,$get_brands);
                         while($row_brands = mysqli_fetch_array($run_brands)){
                             $brand_title = $row_brands['brand_title'];
