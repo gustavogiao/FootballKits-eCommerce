@@ -1,88 +1,88 @@
 # ⚽️ FootballKits eCommerce
 
-Uma aplicação de eCommerce em **PHP nativo** focada na venda de equipamentos de futebol. O projeto foi concebido para servir como estudo prático de PHP e MySQL, mas mantém uma estrutura sólida e extensível para evoluir para uma loja completa.
+A **native PHP** eCommerce application focused on selling football gear. The project was created as a practical exercise to deepen PHP and MySQL knowledge, while keeping a solid, extensible structure that can grow into a production-ready store.
 
-## ✨ Principais destaques
-- Catálogo dinâmico com filtros por **clubes/marcas** e **categorias**.
-- Páginas de detalhes dos produtos com galeria de imagens.
-- Carrinho de compras com cálculo automático de totais.
-- Sistema de **autenticação de utilizadores** (registo, login, atualização de perfil e histórico de encomendas).
-- Área administrativa completa para gestão de produtos, categorias, marcas, encomendas, pagamentos e utilizadores.
-- Interface responsiva construída com **Bootstrap 5** e **Font Awesome**.
+## ✨ Key Highlights
+- Dynamic catalog with filters by **clubs/brands** and **categories**.
+- Product detail pages with image galleries.
+- Shopping cart with automatic total calculations.
+- **User authentication** system (registration, login, profile updates, and order history).
+- Full administrative area for managing products, categories, brands, orders, payments, and users.
+- Responsive interface built with **Bootstrap 5** and **Font Awesome**.
 
-## 🧱 Stack técnica
+## 🧱 Tech Stack
 - PHP 8+ (procedural)
-- MySQL/MariaDB (extensão `mysqli`)
-- HTML5, CSS3 e Bootstrap 5
-- JavaScript básico para interações na interface
+- MySQL/MariaDB (`mysqli` extension)
+- HTML5, CSS3, and Bootstrap 5
+- Vanilla JavaScript for UI interactions
 
-## 📁 Estrutura do projeto
+## 📁 Project Structure
 ```
 FootballKits-eCommerce/
-├── index.php               # Página inicial e vitrine principal
-├── displayAll.php          # Catálogo completo de produtos
-├── productDetails.php      # Detalhe individual de produtos
-├── cart.php                # Gestão do carrinho
-├── admin_area/             # Backoffice administrativo
-│   ├── insertProduct.php   # CRUD de produtos (imagens em admin_area/product_images)
-│   └── ...                 # Gestão de marcas, categorias, encomendas, pagamentos e utilizadores
-├── users_area/             # Fluxos autenticados (perfil, encomendas, pagamentos)
-├── functions/common_function.php # Funções utilitárias (produtos, carrinho, pesquisa, etc.)
-├── includes/connect.php    # Ligação à base de dados
-└── style.css               # Estilos customizados
+├── index.php               # Landing page and main storefront
+├── displayAll.php          # Complete product catalog
+├── productDetails.php      # Individual product details
+├── cart.php                # Cart management
+├── admin_area/             # Back-office dashboard
+│   ├── insertProduct.php   # Product CRUD (images stored in admin_area/product_images)
+│   └── ...                 # Manage brands, categories, orders, payments, and users
+├── users_area/             # Authenticated flows (profile, orders, payments)
+├── functions/common_function.php # Utility helpers (products, cart, search, etc.)
+├── includes/connect.php    # Database connection
+└── style.css               # Custom styling
 ```
 
-## 🚀 Como executar localmente
-1. **Pré-requisitos**
-   - PHP 8 ou superior.
-   - Servidor Apache/Nginx ou o servidor embutido do PHP.
+## 🚀 Getting Started Locally
+1. **Prerequisites**
+   - PHP 8 or newer.
+   - Apache/Nginx or the built-in PHP server.
    - MySQL/MariaDB.
-   - Extensão `mysqli` ativa.
+   - `mysqli` extension enabled.
 
-2. **Clonar o repositório**
+2. **Clone the repository**
    ```bash
-   git clone https://github.com/<seu-usuario>/FootballKits-eCommerce.git
+   git clone https://github.com/<your-username>/FootballKits-eCommerce.git
    cd FootballKits-eCommerce
    ```
 
-3. **Configurar a base de dados**
-   - Crie uma base de dados chamada `footballstore` (ou altere o nome em `includes/connect.php`).
-   - Crie as seguintes tabelas de acordo com as necessidades do projeto:
-     - `productss` (produtos: título, descrição, preço, imagens, categoria, marca, palavras-chave, estado).
-     - `brandss` (marcas/clubes).
-     - `categoriess` (categorias de produto).
-     - `user_table` (utilizadores e credenciais).
-     - `cart_details`, `user_orders`, `user_payments`, entre outras tabelas auxiliares usadas na área administrativa.
-   - Importe/insira dados de exemplo nas tabelas (as imagens dos produtos devem ficar em `admin_area/product_images/`).
+3. **Set up the database**
+   - Create a database named `footballstore` (or update the name in `includes/connect.php`).
+   - Create the following tables according to project needs:
+     - `productss` (products: title, description, price, images, category, brand, keywords, status).
+     - `brandss` (brands/clubs).
+     - `categoriess` (product categories).
+     - `user_table` (users and credentials).
+     - `cart_details`, `user_orders`, `user_payments`, plus other auxiliary tables used in the admin area.
+   - Import/seed sample data into the tables (product images should live in `admin_area/product_images/`).
 
-4. **Configurar credenciais**
-   - Atualize `includes/connect.php` com os dados de acesso ao MySQL caso não esteja a usar o padrão `root` sem senha.
+4. **Configure credentials**
+   - Update `includes/connect.php` with your MySQL credentials if you're not using the default `root` user without a password.
 
-5. **Iniciar o servidor**
-   - Com Apache (XAMPP/WAMP/Laragon): mova o projeto para a pasta `htdocs` e aceda a `http://localhost/FootballKits-eCommerce`.
-   - Com o servidor embutido do PHP:
+5. **Start the server**
+   - With Apache (XAMPP/WAMP/Laragon): move the project into the `htdocs` folder and navigate to `http://localhost/FootballKits-eCommerce`.
+   - With the PHP built-in server:
      ```bash
      php -S localhost:8000
      ```
-     Em seguida, abra `http://localhost:8000/index.php` no navegador.
+     Then open `http://localhost:8000/index.php` in your browser.
 
-6. **Aceder à área administrativa**
+6. **Access the admin area**
    - `http://localhost:8000/admin_area/index.php`
-   - Crie um registo administrativo via `admin_area/adminRegistration.php` e utilize `admin_area/adminLogin.php` para entrar.
+   - Register an admin via `admin_area/adminRegistration.php` and log in through `admin_area/adminLogin.php`.
 
-## 🔐 Segurança e boas práticas
-- Substitua as credenciais padrão do MySQL por utilizadores com permissões mínimas.
-- Configure HTTPS e mecanismos de hashing para palavras-passe em ambientes de produção.
-- Valide e sanitize entradas provenientes de formulários para prevenir SQL Injection e XSS.
+## 🔐 Security & Best Practices
+- Replace default MySQL credentials with users that have the minimum required permissions.
+- Configure HTTPS and password hashing mechanisms for production deployments.
+- Validate and sanitize all form inputs to prevent SQL Injection and XSS attacks.
 
-## 🛠️ Próximos passos sugeridos
-- Implementar integração com gateways de pagamento reais.
-- Adicionar testes automatizados e camadas de serviço/DAO para melhorar a manutenção.
-- Introduzir um sistema de gestão de stock e relatórios analíticos.
-- Migrar para uma arquitetura MVC ou para frameworks como Laravel quando estiver confortável com PHP nativo.
+## 🛠️ Suggested Next Steps
+- Integrate real payment gateways.
+- Add automated tests and service/DAO layers for maintainability.
+- Introduce stock management and analytical reporting.
+- Migrate to an MVC architecture or frameworks like Laravel once you're comfortable with native PHP.
 
-## 🤝 Contribuições
-Sinta-se à vontade para abrir *issues* e *pull requests* com melhorias, correções ou novas funcionalidades. Toda a ajuda é bem-vinda! 
+## 🤝 Contributing
+Feel free to open issues and pull requests with improvements, fixes, or new features. Every contribution is welcome!
 
-## 📄 Licença
-Este projeto é distribuído apenas para fins educativos. Adapte a licença conforme necessário antes de o utilizar em produção.
+## 📄 License
+This project is distributed for educational purposes only. Adapt the license as needed before using it in production.
